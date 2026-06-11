@@ -36,6 +36,8 @@ const BAR_COLORS = [
 
 function App() {
   const [calls, setCalls] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
 
   const [selectedClinic, setSelectedClinic] =
     useState("All Clinics");
@@ -46,24 +48,46 @@ function App() {
   // =========================================
   // FETCH DATA
   // =========================================
-useEffect(() => {
-  fetchData();
-}, []);
-  
-  const fetchData = async () => {
-  try {
-    const response = await API.get("/api/call-metrics");
+  useEffect(() => {
+    let isMounted = true;
 
-    if (Array.isArray(response.data)) {
-      setCalls(response.data);
-    } else {
-      setCalls([]);
-    }
-  } catch (error) {
-    console.log(error);
-    setCalls([]);
-  }
-};
+    const fetchData = async () => {
+      setIsLoading(true);
+      setLoadError("");
+
+      try {
+        const response = await API.get("/api/call-metrics");
+
+        if (!isMounted) return;
+
+        if (Array.isArray(response.data)) {
+          setCalls(response.data);
+        } else {
+          setCalls([]);
+        }
+      } catch (error) {
+        if (!isMounted) return;
+
+        console.error(error);
+        setCalls([]);
+        setLoadError(
+          error?.response?.status
+            ? `The API returned ${error.response.status}. The dashboard can still open, but the data source is failing right now.`
+            : "The dashboard could not reach the API."
+        );
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // =========================================
   // FILTER DATA
@@ -215,25 +239,11 @@ filteredCalls.forEach((item) => {
   // =========================================
   // EXPORT PDF
   // =========================================
-   <button
-  onClick={() =>
-    exportPDF(
-      totalCalls,
-      appointmentsHandled,
-      frontDeskCalls,
-      silentCalls,
-      selectedClinic
-    )
-  }
->
-  Export Report
-</button>
-
   // =========================================
   // LOADING
   // =========================================
 
-  if (!calls.length) {
+  if (isLoading) {
     return (
       <div style={styles.loading}>
         Loading Dashboard...
@@ -290,6 +300,21 @@ filteredCalls.forEach((item) => {
           </button>
         </div>
       </div>
+
+      {loadError ? (
+        <div style={styles.errorBanner}>
+          <div>
+            <div style={styles.errorTitle}>Data source unavailable</div>
+            <div style={styles.errorText}>{loadError}</div>
+          </div>
+          <button
+            onClick={() => window.location.reload()}
+            style={styles.retryButton}
+          >
+            Retry
+          </button>
+        </div>
+      ) : null}
 
       {/* KPI CARDS */}
 

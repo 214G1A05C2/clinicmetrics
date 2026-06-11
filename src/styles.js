@@ -15,6 +15,41 @@ const styles = {
     fontWeight: "bold",
   },
 
+  errorBanner: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "16px",
+    padding: "14px 16px",
+    marginBottom: "20px",
+    borderRadius: "12px",
+    background: "#FFF7ED",
+    border: "1px solid #FDBA74",
+    color: "#9A3412",
+  },
+
+  errorTitle: {
+    fontSize: "16px",
+    fontWeight: "bold",
+    marginBottom: "4px",
+  },
+
+  errorText: {
+    fontSize: "14px",
+    lineHeight: 1.4,
+  },
+
+  retryButton: {
+    padding: "10px 14px",
+    border: "none",
+    borderRadius: "8px",
+    background: "#EA580C",
+    color: "white",
+    fontWeight: "bold",
+    cursor: "pointer",
+    whiteSpace: "nowrap",
+  },
+
   header: {
     display: "flex",
     justifyContent: "space-between",
