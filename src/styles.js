@@ -3,8 +3,11 @@ import theme from "./theme";
 const styles = {
   page: {
     padding: "20px",
-    background:
-      `linear-gradient(180deg, ${theme.colors.surface} 0%, ${theme.colors.pageBg} 28%, ${theme.colors.pageBg} 100%)`,
+    background: `
+      radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 32%),
+      radial-gradient(circle at top right, rgba(124, 58, 237, 0.06), transparent 28%),
+      linear-gradient(180deg, ${theme.colors.surface} 0%, ${theme.colors.pageBg} 24%, ${theme.colors.pageBg} 100%)
+    `,
     minHeight: "100vh",
     fontFamily: theme.typography.fontFamily,
     color: theme.colors.text,
@@ -69,10 +72,11 @@ const styles = {
     gap: "20px",
     marginBottom: "18px",
     padding: "20px 22px",
-    background: theme.colors.surface,
+    background: "rgba(255, 255, 255, 0.9)",
     border: `1px solid ${theme.colors.border}`,
     borderRadius: theme.radius.lg,
     boxShadow: theme.shadows.panel,
+    backdropFilter: "blur(16px)",
     flexWrap: "wrap",
   },
 
@@ -145,20 +149,22 @@ const styles = {
   },
 
   chartCard: {
-    background: theme.colors.surface,
+    background: "rgba(255,255,255,0.96)",
     padding: "20px",
-    borderRadius: theme.radius.md,
+    borderRadius: theme.radius.lg,
     boxShadow: theme.shadows.card,
     border: `1px solid ${theme.colors.border}`,
+    transition: "transform 160ms ease, box-shadow 160ms ease",
   },
 
   monthCard: {
-    background: theme.colors.surface,
+    background: "rgba(255,255,255,0.96)",
     padding: "20px",
-    borderRadius: theme.radius.md,
+    borderRadius: theme.radius.lg,
     marginTop: "18px",
     boxShadow: theme.shadows.card,
     border: `1px solid ${theme.colors.border}`,
+    transition: "transform 160ms ease, box-shadow 160ms ease",
   },
 
   chartTitle: {
