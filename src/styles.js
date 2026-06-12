@@ -1,9 +1,18 @@
+import theme from "./theme";
+
 const styles = {
   page: {
     padding: "20px",
-    background: "#F1F5F9",
+    background:
+      `linear-gradient(180deg, ${theme.colors.surface} 0%, ${theme.colors.pageBg} 28%, ${theme.colors.pageBg} 100%)`,
     minHeight: "100vh",
-    fontFamily: "Arial",
+    fontFamily: theme.typography.fontFamily,
+    color: theme.colors.text,
+  },
+
+  shell: {
+    maxWidth: "1560px",
+    margin: "0 auto",
   },
 
   loading: {
@@ -11,8 +20,9 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    fontSize: "30px",
-    fontWeight: "bold",
+    fontSize: "22px",
+    fontWeight: 600,
+    color: theme.colors.textMuted,
   },
 
   errorBanner: {
@@ -22,10 +32,11 @@ const styles = {
     gap: "16px",
     padding: "14px 16px",
     marginBottom: "20px",
-    borderRadius: "12px",
-    background: "#FFF7ED",
-    border: "1px solid #FDBA74",
+    borderRadius: theme.radius.sm,
+    background: "#FFF8F1",
+    border: "1px solid #FED7AA",
     color: "#9A3412",
+    boxShadow: theme.shadows.card,
   },
 
   errorTitle: {
@@ -42,54 +53,79 @@ const styles = {
   retryButton: {
     padding: "10px 14px",
     border: "none",
-    borderRadius: "8px",
-    background: "#EA580C",
+    borderRadius: theme.radius.sm,
+    background: theme.colors.danger,
     color: "white",
     fontWeight: "bold",
     cursor: "pointer",
     whiteSpace: "nowrap",
+    boxShadow: theme.shadows.soft,
   },
 
   header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "30px",
+    gap: "20px",
+    marginBottom: "18px",
+    padding: "20px 22px",
+    background: theme.colors.surface,
+    border: `1px solid ${theme.colors.border}`,
+    borderRadius: theme.radius.lg,
+    boxShadow: theme.shadows.panel,
+    flexWrap: "wrap",
   },
 
   title: {
-    fontSize: "38px",
-    fontWeight: "bold",
+    fontSize: "28px",
+    fontWeight: 700,
+    letterSpacing: 0,
+    lineHeight: 1.1,
   },
 
   filterContainer: {
     display: "flex",
     gap: "12px",
+    flexWrap: "wrap",
+    alignItems: "center",
+    marginLeft: "auto",
   },
 
   select: {
-    padding: "10px",
+    height: "44px",
+    padding: "0 14px",
+    borderRadius: theme.radius.sm,
+    border: `1px solid ${theme.colors.border}`,
+    background: theme.colors.surface,
+    color: theme.colors.text,
+    boxShadow: theme.shadows.inset,
+    minWidth: "138px",
+    fontSize: "14px",
   },
 
   button: {
-    padding: "10px 15px",
-    background: "#2563EB",
+    height: "44px",
+    padding: "0 16px",
+    background: theme.gradients.primary,
     color: "white",
     border: "none",
-    borderRadius: "8px",
+    borderRadius: theme.radius.sm,
     cursor: "pointer",
+    boxShadow: theme.shadows.card,
+    fontWeight: 700,
+    fontSize: "14px",
   },
 
   cardGrid: {
     display: "grid",
-    gridTemplateColumns: "50% 50%",
-    gap: "25px",
-    marginBottom: "30px",
+    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+    gap: "18px",
+    marginBottom: "18px",
   },
 
   card: {
     padding: "20px",
-    borderRadius: "15px",
+    borderRadius: theme.radius.md,
     color: "white",
   },
 
@@ -104,33 +140,64 @@ const styles = {
 
   chartGrid: {
     display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "25px",
+    gridTemplateColumns: "1.15fr 0.85fr",
+    gap: "18px",
   },
 
   chartCard: {
-    background: "white",
+    background: theme.colors.surface,
     padding: "20px",
-    borderRadius: "15px",
+    borderRadius: theme.radius.md,
+    boxShadow: theme.shadows.card,
+    border: `1px solid ${theme.colors.border}`,
   },
 
   monthCard: {
-    background: "white",
+    background: theme.colors.surface,
     padding: "20px",
-    borderRadius: "15px",
-    marginTop: "20px",
+    borderRadius: theme.radius.md,
+    marginTop: "18px",
+    boxShadow: theme.shadows.card,
+    border: `1px solid ${theme.colors.border}`,
   },
 
   chartTitle: {
-    fontSize: "22px",
-    fontWeight: "bold",
-    marginBottom: "15px",
+    fontSize: "18px",
+    fontWeight: 700,
+    marginBottom: "14px",
+    color: theme.colors.text,
+  },
+
+  tableCard: {
+    background: theme.colors.surface,
+    borderRadius: theme.radius.md,
+    boxShadow: theme.shadows.card,
+    border: `1px solid ${theme.colors.border}`,
+    padding: "18px 20px",
+  },
+
+  tableTitle: {
+    fontSize: "18px",
+    fontWeight: 700,
+    marginBottom: "14px",
+    color: theme.colors.text,
   },
 
   footer: {
     textAlign: "center",
-    marginTop: "30px",
-    fontWeight: "bold",
+    marginTop: "18px",
+    fontWeight: 600,
+    color: theme.colors.textMuted,
+    fontSize: "13px",
+    paddingBottom: "8px",
+  },
+
+  appShell: {
+    background: theme.colors.surfaceSoft,
+    border: `1px solid ${theme.colors.border}`,
+    borderRadius: theme.radius.lg,
+    boxShadow: theme.shadows.panel,
+    overflow: "hidden",
   },
 };
 

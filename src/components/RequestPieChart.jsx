@@ -10,20 +10,7 @@ import {
   Cell,
   LabelList,
 } from "recharts";
-
-const COLORS = [
-  "#2563EB",
-  "#10B981",
-  "#F59E0B",
-  "#8B5CF6",
-  "#06B6D4",
-  "#14B8A6",
-  "#6366F1",
-  "#0EA5E9",
-  "#22C55E",
-  "#F97316",
-  "#EF4444",
-];
+import theme from "../theme";
 
 function RequestPieChart({ filteredCalls = [] }) {
   const requestMap = {};
@@ -51,20 +38,21 @@ function RequestPieChart({ filteredCalls = [] }) {
   return (
     <div
       style={{
-        background: "#FFFFFF",
-        borderRadius: "20px",
+        background: theme.colors.surface,
+        borderRadius: theme.radius.lg,
         padding: "20px",
-        boxShadow:
-          "0 6px 16px rgba(0,0,0,0.08)",
+        boxShadow: theme.shadows.card,
         height: "100%",
+        border: `1px solid ${theme.colors.border}`,
       }}
     >
       <h2
         style={{
-          textAlign: "center",
-          marginBottom: "20px",
-          color: "#0F172A",
-          fontWeight: "bold",
+          textAlign: "left",
+          marginBottom: "18px",
+          color: theme.colors.text,
+          fontWeight: 700,
+          fontSize: "18px",
         }}
       >
         Calls by Request Type
@@ -72,29 +60,37 @@ function RequestPieChart({ filteredCalls = [] }) {
 
       <ResponsiveContainer
         width="100%"
-        height={550}
+        height={540}
       >
         <BarChart
           data={chartData}
           layout="vertical"
           margin={{
             top: 10,
-            right: 60,
-            left: 200,
+            right: 30,
+            left: 156,
             bottom: 10,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#E6EDF5" />
 
-          <XAxis type="number" />
+          <XAxis
+            type="number"
+            tick={{ fontSize: 12, fill: "#64748B" }}
+            axisLine={{ stroke: "#CBD5E1" }}
+            tickLine={{ stroke: "#CBD5E1" }}
+          />
 
           <YAxis
             type="category"
             dataKey="name"
-            width={190}
+            width={154}
             tick={{
-              fontSize: 12,
+              fontSize: 11,
+              fill: "#475569",
             }}
+            axisLine={{ stroke: "#CBD5E1" }}
+            tickLine={false}
           />
 
           <Tooltip
@@ -102,11 +98,17 @@ function RequestPieChart({ filteredCalls = [] }) {
               `${value} Calls`,
               "Count",
             ]}
+            contentStyle={{
+              borderRadius: "12px",
+              border: `1px solid ${theme.colors.border}`,
+              boxShadow: theme.shadows.card,
+              background: "rgba(255,255,255,0.98)",
+            }}
           />
 
           <Bar
             dataKey="value"
-            radius={[0, 8, 8, 0]}
+            radius={[0, 10, 10, 0]}
           >
             <LabelList
               dataKey="value"
@@ -118,9 +120,9 @@ function RequestPieChart({ filteredCalls = [] }) {
                 <Cell
                   key={`cell-${index}`}
                   fill={
-                    COLORS[
+                    theme.chartColors[
                       index %
-                        COLORS.length
+                        theme.chartColors.length
                     ]
                   }
                 />
@@ -132,11 +134,11 @@ function RequestPieChart({ filteredCalls = [] }) {
 
       <div
         style={{
-          textAlign: "center",
-          marginTop: "15px",
-          fontSize: "18px",
-          fontWeight: "bold",
-          color: "#0F172A",
+          textAlign: "right",
+          marginTop: "12px",
+          fontSize: "14px",
+          fontWeight: 700,
+          color: theme.colors.text,
         }}
       >
         Total Requests: {totalRequests}

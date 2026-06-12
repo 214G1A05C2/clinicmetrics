@@ -16,19 +16,10 @@ import RequestPieChart from "./components/RequestPieChart";
 import "./App.css";
 import styles from "./styles";
 import { exportPDF } from "./utils/exportPDF";
+import theme from "./theme";
 // =========================================
 // COLORS
 // =========================================
-
-const BAR_COLORS = [
-  "#2563EB",
-  "#10B981",
-  "#F59E0B",
-  "#8B5CF6",
-  "#06B6D4",
-  "#14B8A6",
-  "#6366F1",
-];
 
 // =========================================
 // APP
@@ -256,6 +247,7 @@ filteredCalls.forEach((item) => {
   id="dashboard-content"
   style={styles.page}
 >
+      <div style={styles.shell}>
 
       <div style={styles.header}>
         <h1 style={styles.title}>
@@ -293,7 +285,18 @@ filteredCalls.forEach((item) => {
           </select>
 
           <button
-            onClick={exportPDF}
+            onClick={() =>
+              exportPDF({
+                calls,
+                filteredCalls,
+                selectedClinic,
+                selectedMonth,
+                totalCalls,
+                appointmentsHandled,
+                frontDeskCalls,
+                silentCalls,
+              })
+            }
             style={styles.button}
           >
             Export PDF
@@ -409,9 +412,9 @@ textAnchor="end"
                     <Cell
                       key={index}
                       fill={
-                        BAR_COLORS[
+                        theme.chartColors[
                           index %
-                            BAR_COLORS.length
+                            theme.chartColors.length
                         ]
                       }
                     />
@@ -498,8 +501,8 @@ textAnchor="end"
       {/* FOOTER */}
 
       <div style={styles.footer}>
-        © 2026 EzMedTech | AI Voice Agent
-        Dashboard
+        © 2026 EzMedTech | AI Voice Agent Dashboard
+      </div>
       </div>
     </div>
   );
