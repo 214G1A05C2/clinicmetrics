@@ -31,7 +31,7 @@ const addSectionHeader = (doc, title, subtitle) => {
   const x = 14;
   const y = doc.lastAutoTable
     ? doc.lastAutoTable.finalY + 14
-    : 84;
+    : 94;
 
   doc.setFillColor(248, 250, 252);
   doc.roundedRect(x, y, 182, 10, 3, 3, "F");
@@ -54,15 +54,15 @@ const addKpiCard = (doc, { x, y, w, title, value, accent }) => {
 
   doc.setFillColor(fill[0], fill[1], fill[2]);
   doc.setDrawColor(255, 255, 255);
-  doc.roundedRect(x, y, w, 26, 4, 4, "F");
+  doc.roundedRect(x, y, w, 34, 5, 5, "F");
 
   doc.setTextColor(text[0], text[1], text[2]);
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(9);
-  doc.text(title, x + 4, y + 7);
+  doc.setFontSize(8.5);
+  doc.text(title, x + 4, y + 10);
 
-  doc.setFontSize(15);
-  doc.text(String(value), x + 4, y + 18);
+  doc.setFontSize(16);
+  doc.text(String(value), x + 4, y + 24);
 };
 
 export const exportPDF = ({
@@ -121,7 +121,7 @@ export const exportPDF = ({
   // KPI row
   addKpiCard(doc, {
     x: 14,
-    y: 50,
+    y: 52,
     w: 42,
     title: "Total Calls",
     value: totalCalls,
@@ -129,7 +129,7 @@ export const exportPDF = ({
   });
   addKpiCard(doc, {
     x: 59,
-    y: 50,
+    y: 52,
     w: 42,
     title: "Appointments",
     value: appointmentsHandled,
@@ -137,7 +137,7 @@ export const exportPDF = ({
   });
   addKpiCard(doc, {
     x: 104,
-    y: 50,
+    y: 52,
     w: 42,
     title: "Front Desk",
     value: frontDeskCalls,
@@ -145,7 +145,7 @@ export const exportPDF = ({
   });
   addKpiCard(doc, {
     x: 149,
-    y: 50,
+    y: 52,
     w: 47,
     title: "Silent Calls",
     value: silentCalls,
@@ -155,7 +155,7 @@ export const exportPDF = ({
   // Summary tables
   addSectionHeader(doc, "Request Type Summary", "Breakdown of the selected records by request type");
   autoTable(doc, {
-    startY: doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 104,
+    startY: doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 118,
     head: [["Request Type", "Count", "Share"]],
     body: requestCounts.map((row) => [
       row.label,
